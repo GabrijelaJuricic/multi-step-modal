@@ -1,13 +1,15 @@
-import Modal from "./Modal";
+import { Fragment } from "react";
 
 const Korak5 = () => {
-    return (
-        <Modal>
-            <h2>Vaša prijava je uspješno poslana</h2>
-            <p>Vaša prijava je uspješno poslana i zaprimljena. Kontaktirati ćemp vas u najkraćem mogućem roku. Hvala Vam!</p>
-            <button>Zatvori</button>
-        </Modal>
-    )
+  return (
+    <Fragment>
+      <p>
+        Vaša prijava je uspješno poslana i zaprimljena. Kontaktirat ćemo vas u
+        najkraćem mogućem roku. Hvala Vam!
+      </p>
+      <button>Završi</button>
+    </Fragment>
+  );
 };
 
 export default Korak5;

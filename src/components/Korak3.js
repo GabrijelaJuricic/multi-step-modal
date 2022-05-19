@@ -1,8 +1,4 @@
-import Modal from "./Modal";
-
-import { useState } from "react";
-import Korak2 from "./Korak2";
-import Korak4 from "./Korak4";
+import { Fragment, useState } from "react";
 
 const Korak3 = (props) => {
   const [enteredName, setEnteredName] = useState("");
@@ -12,33 +8,17 @@ const Korak3 = (props) => {
   const [enteredNumberTouched, setEnteredNumberTouched] = useState(false);
   const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
 
-  const [prevStep, setPrevStep] = useState(false);
-  const [nextStep, setNextStep] = useState(false);
-
-  const previousStepHandler = (event) => {
-    setPrevStep(true);
-  };
-
-const nextStepHandler = (event) => {
-setNextStep(true);
-};
+  // === Derived States ===
 
   const enteredNameIsValid = enteredName !== "";
   const enteredNumberIsValid = enteredNumber !== "";
-  const enteredEmailIsValid = enteredEmail !== "" && enteredEmail.includes("@");
+  const enteredEmailIsValid = enteredEmail !== "";
 
-  const nameInputIsInvalid =
-    !enteredNameIsValid && enteredNameTouched;
-
+  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
   const numberInputIsInvalid = !enteredNumberIsValid && enteredNumberTouched;
-
   const emailInputIsInvalid = !enteredEmailIsValid && enteredEmailTouched;
 
-  let formIsValid = false;
-
-  if (enteredNameIsValid && enteredNumberIsValid && enteredEmailIsValid) {
-    formIsValid = true;
-  }
+  // === Event Handlers ===
 
   const enteredNameHandler = (event) => {
     setEnteredName(event.target.value);
@@ -63,34 +43,24 @@ setNextStep(true);
   const formSubmissionHandler = (event) => {
     event.preventDefault();
 
-    setEnteredNameTouched(true);
-    setEnteredNumberTouched(true);
-    setEnteredEmailTouched(true);
+    // setEnteredNameTouched(true);
+    // setEnteredNumberTouched(true);
+    // setEnteredEmailTouched(true);
+    if (enteredNameIsValid && enteredNumberIsValid && enteredEmailIsValid) {
+      props.inputActive();
+      console.log("korak 3 radi");
+    }
+    // setEnteredName("");
+    // setEnteredNumber("");
+    // setEnteredEmail("");
 
-    console.log(enteredName, enteredNumber, enteredEmail);
-
-    setEnteredName("");
-    setEnteredNumber("");
-    setEnteredEmail("");
-
-    setEnteredNameTouched(false);
-    setEnteredNumberTouched(false);
-    setEnteredEmailTouched(false);
+    // setEnteredNameTouched(false);
+    // setEnteredNumberTouched(false);
+    // setEnteredEmailTouched(false);
   };
 
-  // const nameInputClasses = nameInputIsInvalid
-  //   ? "form-control invalid"
-  //   : "form-control";
-  // const numberInputClasses = numberInputIsInvalid
-  //   ? "form-control invalid"
-  //   : "form-control";
-  // const emailInputClasses = emailInputIsInvalid
-  //   ? "form-control invalid"
-  //   : "form-control";
-
   return (
-    <Modal>
-      <h2>Korak 3. Vaši kontakt podaci:</h2>
+    <Fragment>
       <form onSubmit={formSubmissionHandler}>
         <div>
           <div className="form-control">
@@ -98,7 +68,7 @@ setNextStep(true);
               onBlur={nameBlurHandler}
               type="text"
               id="name"
-              placeholder="Ime i prezime"
+              placeholder="Ime i prezime*"
               onChange={enteredNameHandler}
               value={enteredName}
             />
@@ -113,7 +83,7 @@ setNextStep(true);
               onBlur={numberBlurHandler}
               type="number"
               id="name"
-              placeholder="Broj mobitela"
+              placeholder="Broj mobitela*"
               onChange={enteredNumberHandler}
               value={enteredNumber}
             />
@@ -128,16 +98,12 @@ setNextStep(true);
             onBlur={emailBlurHandler}
             type="email"
             id="name"
-            placeholder="Email"
+            placeholder="Email*"
             onChange={enteredEmailHandler}
             value={enteredEmail}
           />
           {emailInputIsInvalid && (
-            <p className="error-text">
-              E-mail je obavezan.
-              <br />
-              Mora sadržavati "@".
-            </p>
+            <p className="error-text">E-mail je obavezan.</p>
           )}
         </div>
         <div>
@@ -149,14 +115,8 @@ setNextStep(true);
             ></textarea>
           </div>
         </div>
-        <div className="form-actions">
-          <button onClick={previousStepHandler}>Nazad</button>
-          <button disabled={!formIsValid} onClick={nextStepHandler}>Dalje</button>
-        </div>
-        {prevStep && <Korak2/>}
-        {nextStep && <Korak4/>}
       </form>
-    </Modal>
+    </Fragment>
   );
 };
 

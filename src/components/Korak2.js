@@ -1,63 +1,112 @@
-import { useState } from "react";
-import Korak1 from "./Korak1";
-import Korak3 from "./Korak3";
-import Modal from "./Modal";
+import { Fragment, useState } from "react";
+import Services from "./Services";
+import "./Modal.css";
 
 const Korak2 = (props) => {
-  const [nextStep, setNextStep] = useState(false);
-  const [prevStep, setPrevStep] = useState(false);
+  const [openCoupon, setOpenCoupon] = useState(false);
+  const [enteredCoupon, setEnteredCoupon] = useState("");
+  const [message, setMessage] = useState();
+  const [totalAmount, setTotalAmount] = useState(0);
 
-const nextStepHandler = (event) => {
-  setNextStep(true);
-};
+  const enteredCouponIsValid = enteredCoupon === "Tokić123";
 
-const previousStepHandler = (event) => {
-  setPrevStep(true);
-};
+  // === Dummy data ===
+
+  var serviceItems = [
+    { serviceItem: "Zamjena ulja i filtera", value: 500, id: 66 },
+    { serviceItem: "Promjena pakni", value: 450, id: 87 },
+    { serviceItem: "Promjena guma", value: 100, id: 73 },
+    { serviceItem: "Servis klima uređaja", value: 299, id: 45 },
+    { serviceItem: "Balansiranje guma", value: 50, id: 50 },
+    { serviceItem: "Zamjena ulja u kočnicama", value: 229, id: 13 },
+  ];
+
+  // === Event Handlers ===
+
+  const couponHandler = () => {
+    setOpenCoupon(true);
+  };
+
+  const enteredCouponHandler = (event) => {
+    setEnteredCoupon(event.target.value);
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+  };
+
+  // === ===
+
+  const triggerCheckbox = () => {
+    props.checkActive();
+  };
+
+  const addTotalAmount = (amount) => {
+    setTotalAmount(totalAmount + amount);
+  };
+
+  //  === Coupon section ===
+
+  const messageHandler = () => {
+    if (enteredCouponIsValid) {
+      setMessage("Hvala vam, unijeli ste ispravan kod kupona!");
+    } else {
+      setMessage("Neispravan kod, molimo vas pokušajte ponovno.");
+    }
+  };
 
   return (
-    <Modal>
-      <h2>Korak 2. Odaberite jednu ili više usluga:</h2>
+    <Fragment>
       <form>
-        <input
-          type="checkbox"
-          name="service"
-          value="500"
-        />
-        <label htmlFor="">Zamjena ulja i filtera (500 kn)</label>
-        <input type="checkbox" name="service"/>
-        <label htmlFor="">Promjena pakni (450 kn)</label>
-        <input type="checkbox" name="service"/>
-        <label htmlFor="">Promjena guma (100 kn)</label>
-        <input type="checkbox" name="service"/>
-        <label htmlFor="">Servis klima uređaja (299 kn)</label>
-        <input type="checkbox" name="service"/>
-        <label htmlFor="">Balansiranje guma (50 kn)</label>
-        <input type="checkbox" name="service"/>
-        <label htmlFor="">Zamjena ulja u kočnicama (229 kn)</label>
+        <div>
+          <ul>
+            {serviceItems.map((option) => {
+              return (
+                <Services
+                  onCheckbox={triggerCheckbox}
+                  service={option.serviceItem}
+                  price={option.value}
+                  key={option.id}
+                  onValue={addTotalAmount}
+                />
+              );
+            })}
+          </ul>
+        </div>
       </form>
-      <div>
-        <a href="coupon">
+      <form onSubmit={submitHandler}>
+        <a href="#coupon" onClick={couponHandler}>
           Imam kupon
         </a>
-        <input
-        type="text"
-          name="coupon"
-          title="Unesite kod kupona ovdje"
-        ></input>
-        <button type="submit" value="Submit">
-          Primijeni
-        </button>
-      </div>
+        {openCoupon && (
+          <div id="coupon">
+            <input
+              type="text"
+              name="coupon"
+              placeholder="Unesite kod"
+              value={enteredCoupon}
+              onChange={enteredCouponHandler}
+            />
+            {message}
+            {enteredCoupon && (
+              <div>
+                <p>OSNOVICA:</p> {`${0} kn`}
+                <p>Popust (30%):</p> {`${0} kn`}
+              </div>
+            )}
+            <button type="submit" value="Submit" onClick={messageHandler}>
+              Primijeni
+            </button>
+          </div>
+        )}
+      </form>
       <div>
-        <span><strong>Ukupno:</strong></span>
-        <span>{`${""} kn`}</span>
+        <span>
+          <strong>Ukupno:</strong>
+        </span>
+        <span>{`${totalAmount} kn`}</span>
       </div>
-      <button onClick={previousStepHandler} >Previous</button>
-      <button onClick={nextStepHandler}>Next</button>
-      {prevStep && <Korak1/>}
-      {nextStep && <Korak3/>}
-    </Modal>
+    </Fragment>
   );
 };
 

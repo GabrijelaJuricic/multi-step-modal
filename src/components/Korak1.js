@@ -1,99 +1,46 @@
-import { useState } from "react";
-import classes from "./Korak1.module.css";
-import Korak2 from "./Korak2";
-import Modal from "./Modal";
+import { Fragment } from "react";
+import BrandItem from "./BrandItem";
 
-const Korak1 = () => {
-  const [isSelected, setIsSelected] = useState(false);
-  const [nextStep, setNextStep] = useState(false);
+const Korak1 = (props) => {
+  // === Dummy data ===
 
-  const selectHandler = (event) => {
-    setIsSelected(true);
+  var cars = [
+    { name: "Peugeot", id: 1, value: "peugeot" },
+    { name: "Volkswagen", id: 2, value: "volkswagen" },
+    { name: "Citroen", id: 3, value: "citroen" },
+    { name: "Audi", id: 4, value: "audi" },
+    { name: "BMW", id: 5, value: "bmw" },
+    { name: "Seat", id: 6, value: "" },
+    { name: "Alfa Romeo", id: 7, value: "alfa-romeo" },
+    { name: "Kia", id: 8, value: "kia" },
+    { name: "Hyundai", id: 9, value: "hyundai" },
+    { name: "Honda", id: 10, value: "honda" },
+    { name: "Toyota", id: 11, value: "toyota" },
+  ];
+
+  const triggerRadio = () => {
+    props.radioActive();
   };
-  
-  const nextStepHandler = (event) => {
-    setNextStep(true);
-  };
-
-  let formIsValid = false;
-  if (isSelected) {
-    formIsValid = true;
-  }
-
 
   return (
-    <Modal>
-      <h2>Korak 1. Odaberite proizvođača vašeg vozila:</h2>
+    <Fragment>
       <form>
         <div>
-          <label htmlFor="Peugeot">Peugeot</label>
-          <input
-            onClick={selectHandler}
-            type="radio"
-            id="Peugeot"
-            name="cars"
-          />
-
-          <label htmlFor="Volkswagen">Volkswagen</label>
-          <input
-            onClick={selectHandler}
-            type="radio"
-            id="Volkswagen"
-            name="cars"
-          />
-
-          <label htmlFor="Citroen">Citroen</label>
-          <input
-            onClick={selectHandler}
-            type="radio"
-            id="Citroen"
-            name="cars"
-          />
-
-          <label htmlFor="Audi">Audi</label>
-          <input onClick={selectHandler} type="radio" id="Audi" name="cars" />
-
-          <label htmlFor="Bmw">Bmw</label>
-          <input onClick={selectHandler} type="radio" id="Bmw" name="cars" />
-
-          <label htmlFor="Seat">Seat</label>
-          <input onClick={selectHandler} type="radio" id="Seat" name="cars" />
-
-          <label htmlFor="Alfa Romeo">Alfa Romeo</label>
-          <input
-            onClick={selectHandler}
-            type="radio"
-            id="Alfa Romeo"
-            name="cars"
-          />
-
-          <label htmlFor="Kia">Kia</label>
-          <input onClick={selectHandler} type="radio" id="Kia" name="cars" />
-
-          <label htmlFor="Hyundai">Hyundai</label>
-          <input
-            onClick={selectHandler}
-            type="radio"
-            id="Hyundai"
-            name="cars"
-          />
-
-          <label htmlFor="Honda">Honda</label>
-          <input onClick={selectHandler} type="radio" id="Honda" name="cars" />
-
-          <label htmlFor="Toyota">Toyota</label>
-          <input onClick={selectHandler} type="radio" id="Toyota" name="cars" />
+          <ul>
+            {cars.map((brand) => {
+              return (
+                <BrandItem
+                  name={brand.name}
+                  onRadio={triggerRadio}
+                  key={brand.id}
+                  value={brand.value}
+                />
+              );
+            })}
+          </ul>
         </div>
       </form>
-      <button
-        disabled={!formIsValid}
-        className={classes.button}
-        onClick={nextStepHandler}
-      >
-        Dalje
-      </button>
-      {nextStep && <Korak2 />}
-    </Modal>
+    </Fragment>
   );
 };
 
