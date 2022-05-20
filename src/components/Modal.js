@@ -77,11 +77,11 @@ const Modal = () => {
           </div>
           <div className="body">{pageDisplay()}</div>
           <div className="footer">
-            <button hidden={page == 0 || page == 4} onClick={prevHandler}>
+            <button hidden={page === 0 || page === 4} onClick={prevHandler}>
               Nazad
             </button>
             <button
-              hidden={page == 4}
+              hidden={page === 4}
               onClick={onClickHandler}
               disabled={!formIsValid}
             >

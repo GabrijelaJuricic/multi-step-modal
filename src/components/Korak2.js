@@ -1,14 +1,14 @@
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import Services from "./Services";
 import "./Modal.css";
 
 const Korak2 = (props) => {
   const [openCoupon, setOpenCoupon] = useState(false);
-  const [enteredCoupon, setEnteredCoupon] = useState("");
-  const [message, setMessage] = useState();
+  const [couponSuccessMessage, setCouponSuccessMessage] = useState();
+  const [couponErrorMessage, setCouponErrorMessage] = useState();
   const [totalAmount, setTotalAmount] = useState(0);
 
-  const enteredCouponIsValid = enteredCoupon === "Tokić123";
+  const couponInputRef = useRef();
 
   // === Dummy data ===
 
@@ -25,10 +25,6 @@ const Korak2 = (props) => {
 
   const couponHandler = () => {
     setOpenCoupon(true);
-  };
-
-  const enteredCouponHandler = (event) => {
-    setEnteredCoupon(event.target.value);
   };
 
   const submitHandler = (event) => {
@@ -48,10 +44,14 @@ const Korak2 = (props) => {
   //  === Coupon section ===
 
   const messageHandler = () => {
-    if (enteredCouponIsValid) {
-      setMessage("Hvala vam, unijeli ste ispravan kod kupona!");
+    const enteredCoupon = couponInputRef.current.value;
+
+    if (enteredCoupon.trim().toString() === "Tokić123") {
+      setCouponSuccessMessage("Hvala vam, unijeli ste ispravan kod kupona!");
+      setCouponErrorMessage("");
     } else {
-      setMessage("Neispravan kod, molimo vas pokušajte ponovno.");
+      setCouponErrorMessage("Neispravan kod, molimo vas pokušajte ponovno.");
+      setCouponSuccessMessage("");
     }
   };
 
@@ -75,36 +75,47 @@ const Korak2 = (props) => {
         </div>
       </form>
       <form onSubmit={submitHandler}>
-        <a href="#coupon" onClick={couponHandler}>
-          Imam kupon
-        </a>
+        {!openCoupon && (
+          <a href="#coupon" onClick={couponHandler}>
+            Imam kupon
+          </a>
+        )}
+
         {openCoupon && (
           <div id="coupon">
             <input
+              ref={couponInputRef}
               type="text"
               name="coupon"
               placeholder="Unesite kod"
-              value={enteredCoupon}
-              onChange={enteredCouponHandler}
             />
-            {message}
-            {enteredCoupon && (
-              <div>
-                <p>OSNOVICA:</p> {`${0} kn`}
-                <p>Popust (30%):</p> {`${0} kn`}
-              </div>
-            )}
             <button type="submit" value="Submit" onClick={messageHandler}>
               Primijeni
             </button>
+            {couponErrorMessage && (
+              <div>
+                <p>{couponErrorMessage}</p>
+              </div>
+            )}
+            {couponSuccessMessage && (
+              <div>
+                <p>{couponSuccessMessage}</p>
+                <p>OSNOVICA: {`${totalAmount} kn`}</p>
+                <p>Popust (30%): {`${totalAmount * -0.3} kn`}</p>
+              </div>
+            )}
           </div>
         )}
       </form>
       <div>
         <span>
-          <strong>Ukupno:</strong>
+          <strong>Ukupno: </strong>
         </span>
-        <span>{`${totalAmount} kn`}</span>
+        {couponSuccessMessage ? (
+          <span>{`${totalAmount * 0.7} kn`}</span>
+        ) : (
+          <span>{`${totalAmount} kn`}</span>
+        )}
       </div>
     </Fragment>
   );

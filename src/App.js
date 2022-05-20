@@ -13,7 +13,7 @@ const App = () => {
   return (
     <Fragment>
       <header className="header">
-        <img className="logo" src={tokicLogo} />
+        <img className="logo" src={tokicLogo} alt="Tokić logo" />
         <div className="flex">
           <h2>Konfigurator servisa</h2>
           <p>Izračunajte trošak servisa</p>
