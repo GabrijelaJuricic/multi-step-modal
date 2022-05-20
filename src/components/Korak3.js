@@ -1,111 +1,81 @@
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 
 const Korak3 = (props) => {
-  const [enteredName, setEnteredName] = useState("");
-  const [enteredNumber, setEnteredNumber] = useState("");
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [enteredNameTouched, setEnteredNameTouched] = useState(false);
-  const [enteredNumberTouched, setEnteredNumberTouched] = useState(false);
-  const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
+  const [nameError, setNameError] = useState();
+  const [numberError, setNumberError] = useState();
+  const [emailError, setEmailError] = useState();
 
-  // === Derived States ===
+  // === Refs ===
 
-  const enteredNameIsValid = enteredName !== "";
-  const enteredNumberIsValid = enteredNumber !== "";
-  const enteredEmailIsValid = enteredEmail !== "";
-
-  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
-  const numberInputIsInvalid = !enteredNumberIsValid && enteredNumberTouched;
-  const emailInputIsInvalid = !enteredEmailIsValid && enteredEmailTouched;
+  const inputNameRef = useRef();
+  const inputNumberRef = useRef();
+  const inputEmailRef = useRef();
 
   // === Event Handlers ===
 
-  const enteredNameHandler = (event) => {
-    setEnteredName(event.target.value);
-  };
-  const enteredNumberHandler = (event) => {
-    setEnteredNumber(event.target.value);
-  };
-  const enteredEmailHandler = (event) => {
-    setEnteredEmail(event.target.value);
-  };
+  const formSubmissionHandler = () => {
+    const enteredName = inputNameRef.current.value;
+    const enteredNumber = inputNumberRef.current.value;
+    const enteredEmail = inputEmailRef.current.value;
 
-  const nameBlurHandler = (event) => {
-    setEnteredNameTouched(true);
-  };
-  const numberBlurHandler = (event) => {
-    setEnteredNumberTouched(true);
-  };
-  const emailBlurHandler = (event) => {
-    setEnteredEmailTouched(true);
-  };
-
-  const formSubmissionHandler = (event) => {
-    event.preventDefault();
-
-    // setEnteredNameTouched(true);
-    // setEnteredNumberTouched(true);
-    // setEnteredEmailTouched(true);
-    if (enteredNameIsValid && enteredNumberIsValid && enteredEmailIsValid) {
-      props.inputActive();
-      console.log("korak 3 radi");
+    if (
+      enteredName.trim().length === 0 &&
+      enteredNumber.trim().length === 0 &&
+      enteredEmail.trim().length === 0
+    ) {
+      setNameError() || setEmailError() || setNumberError();
     }
-    // setEnteredName("");
-    // setEnteredNumber("");
-    // setEnteredEmail("");
+    props.inputActive(enteredName && enteredNumber && enteredEmail);
+  };
 
-    // setEnteredNameTouched(false);
-    // setEnteredNumberTouched(false);
-    // setEnteredEmailTouched(false);
+  const nameBlurHandler = () => {
+    setNameError("Ime i prezime su obavezni.");
+  };
+  const numberBlurHandler = () => {
+    setNumberError("Broj je obavezan.");
+  };
+  const emailBlurHandler = () => {
+    setEmailError("E-mail je obavezan.");
   };
 
   return (
     <Fragment>
-      <form onSubmit={formSubmissionHandler}>
+      <form onChange={formSubmissionHandler}>
         <div>
           <div className="form-control">
             <input
+              ref={inputNameRef}
               onBlur={nameBlurHandler}
               type="text"
               id="name"
               placeholder="Ime i prezime*"
-              onChange={enteredNameHandler}
-              value={enteredName}
             />
-            {nameInputIsInvalid && (
-              <p className="error-text">Ime i prezime su obavezni.</p>
-            )}
           </div>
+          {nameError}
         </div>
         <div>
           <div className="form-control">
             <input
+              ref={inputNumberRef}
               onBlur={numberBlurHandler}
               type="number"
               id="name"
               placeholder="Broj mobitela*"
-              onChange={enteredNumberHandler}
-              value={enteredNumber}
             />
-            {numberInputIsInvalid && (
-              <p className="error-text">Broj mobitela je obavezan.</p>
-            )}
           </div>
+          {numberError}
         </div>
 
         <div>
           <input
+            ref={inputEmailRef}
             onBlur={emailBlurHandler}
             type="email"
             id="name"
             placeholder="Email*"
-            onChange={enteredEmailHandler}
-            value={enteredEmail}
           />
-          {emailInputIsInvalid && (
-            <p className="error-text">E-mail je obavezan.</p>
-          )}
         </div>
+        {emailError}
         <div>
           <div className="form-control">
             <textarea

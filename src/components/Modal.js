@@ -42,7 +42,7 @@ const Modal = () => {
       case 1:
         return <Korak2 checkActive={formValidity} />;
       case 2:
-        return <Korak3 />;
+        return <Korak3 inputActive={step3Validity} />;
       case 3:
         return <Korak4 />;
       case 4:
@@ -54,16 +54,22 @@ const Modal = () => {
     setFormIsValid(true);
   };
 
+  const step3Validity = (value) => {
+    setFormIsValid(value);
+    console.log("Step3 validity!");
+  };
+
   // === Previous & Next button ===
   const prevHandler = () => {
+    setFormIsValid("");
     setPage((currPage) => currPage - 1);
   };
   const onClickHandler = () => {
     if (formIsValid) {
       setPage((currPage) => currPage + 1);
+      setFormIsValid("");
       console.log("formIsValid u onClickHandleru <Modal/>");
     }
-    setFormIsValid("");
   };
 
   return (
