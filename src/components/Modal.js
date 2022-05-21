@@ -53,7 +53,7 @@ const Modal = (props) => {
           />
         );
       case 4:
-        return <Step5 />;
+        return <Step5 onClose={props.onClose} />;
     }
   };
 

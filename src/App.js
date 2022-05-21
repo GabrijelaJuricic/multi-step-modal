@@ -9,6 +9,9 @@ const App = () => {
   const openModalHandler = () => {
     setIsOpen(true);
   };
+  const closeModalHandler = () => {
+    setIsOpen(false);
+  };
 
   return (
     <Fragment>
@@ -23,7 +26,7 @@ const App = () => {
         <p>Pritisnite gumb niže da biste pokrenuli</p>
         <button onClick={openModalHandler}>Pokreni konfigurator</button>
       </main>
-      {isOpen && <Modal />}
+      {isOpen && <Modal onClose={closeModalHandler} />}
     </Fragment>
   );
 };
