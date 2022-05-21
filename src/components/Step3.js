@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState } from "react";
 
-const Korak3 = (props) => {
+const Step3 = (props) => {
   const [nameError, setNameError] = useState();
   const [numberError, setNumberError] = useState();
   const [emailError, setEmailError] = useState();
@@ -90,4 +90,4 @@ const Korak3 = (props) => {
   );
 };
 
-export default Korak3;
+export default Step3;

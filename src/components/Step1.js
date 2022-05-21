@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import BrandItem from "./BrandItem";
 
-const Korak1 = (props) => {
+const Step1 = (props) => {
   // === Dummy data ===
 
   var cars = [
@@ -44,4 +44,4 @@ const Korak1 = (props) => {
   );
 };
 
-export default Korak1;
+export default Step1;

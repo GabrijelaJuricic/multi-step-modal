@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-const Korak4 = () => {
+const Step4 = (props) => {
   // === Dummy data ===
 
   var message = (
@@ -13,26 +13,41 @@ const Korak4 = () => {
     </p>
   );
 
+  props.summaryActive();
+
+  // === Event Handlers ===
+
+  const switchToModelHandler = () => {
+    props.switchToModel();
+  };
+
+  const switchToServiceHandler = () => {
+    props.switchToService();
+  };
+  const switchToContactHandler = () => {
+    props.switchToContact();
+  };
+
   return (
     <Fragment>
       {message}
       <div>
         <h3>MODEL VOZILA</h3>
-        <button>Uredi</button>
-        <p>Folcika</p>
+        <button onClick={switchToModelHandler}>Uredi</button>
+        <p>{"car"}</p>
       </div>
       <div>
         <h3>ODABRANE USLUGE</h3>
-        <button>Uredi</button>
-        <p>tralalala</p>
+        <button onClick={switchToServiceHandler}>Uredi</button>
+        <p>{"service"}</p>
       </div>
       <div>
         <h3>KONTAKT PODACI</h3>
-        <button>Uredi</button>
-        <p>tra</p>
+        <button onClick={switchToContactHandler}>Uredi</button>
+        <p>{"contact info"}</p>
       </div>
     </Fragment>
   );
 };
 
-export default Korak4;
+export default Step4;

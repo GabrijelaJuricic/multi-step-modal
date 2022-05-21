@@ -2,11 +2,11 @@ import ReactDOM from "react-dom";
 import { Fragment, useState } from "react";
 import "./Modal.css";
 
-import Korak1 from "./Korak1";
-import Korak2 from "./Korak2";
-import Korak3 from "./Korak3";
-import Korak4 from "./Korak4";
-import Korak5 from "./Korak5";
+import Step1 from "./Step1";
+import Step2 from "./Step2";
+import Step3 from "./Step3";
+import Step4 from "./Step4";
+import Step5 from "./Step5";
 
 const Backdrop = () => {
   return <div className="backdrop"></div>;
@@ -19,7 +19,7 @@ const ModalOverlay = (props) => {
   );
 };
 
-const Modal = () => {
+const Modal = (props) => {
   const [page, setPage] = useState(0);
   const [formIsValid, setFormIsValid] = useState(false);
 
@@ -38,17 +38,26 @@ const Modal = () => {
   const pageDisplay = () => {
     switch (page) {
       case 0:
-        return <Korak1 radioActive={formValidity} />;
+        return <Step1 radioActive={formValidity} />;
       case 1:
-        return <Korak2 checkActive={formValidity} />;
+        return <Step2 checkActive={formValidity} />;
       case 2:
-        return <Korak3 inputActive={step3Validity} />;
+        return <Step3 inputActive={step3Validity} />;
       case 3:
-        return <Korak4 />;
+        return (
+          <Step4
+            summaryActive={step4Validity}
+            switchToModel={switchModelFunc}
+            switchToService={switchServiceFunc}
+            switchToContact={switchContactFunc}
+          />
+        );
       case 4:
-        return <Korak5 />;
+        return <Step5 />;
     }
   };
+
+  //  === Validity check ===
 
   const formValidity = () => {
     setFormIsValid(true);
@@ -56,10 +65,32 @@ const Modal = () => {
 
   const step3Validity = (value) => {
     setFormIsValid(value);
-    console.log("Step3 validity!");
+  };
+
+  const step4Validity = () => {
+    setFormIsValid(!formIsValid);
+  };
+
+  // === Step 4: Switch functions ===
+
+  const switchModelFunc = () => {
+    setPage((currPage) => {
+      return currPage - 3;
+    });
+  };
+  const switchServiceFunc = () => {
+    setPage((currPage) => {
+      return currPage - 2;
+    });
+  };
+  const switchContactFunc = () => {
+    setPage((currPage) => {
+      return currPage - 1;
+    });
   };
 
   // === Previous & Next button ===
+
   const prevHandler = () => {
     setFormIsValid("");
     setPage((currPage) => currPage - 1);
@@ -68,7 +99,6 @@ const Modal = () => {
     if (formIsValid) {
       setPage((currPage) => currPage + 1);
       setFormIsValid("");
-      console.log("formIsValid u onClickHandleru <Modal/>");
     }
   };
 

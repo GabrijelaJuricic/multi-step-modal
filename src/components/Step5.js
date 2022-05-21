@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-const Korak5 = () => {
+const Step5 = () => {
   return (
     <Fragment>
       <p>
@@ -12,4 +12,4 @@ const Korak5 = () => {
   );
 };
 
-export default Korak5;
+export default Step5;

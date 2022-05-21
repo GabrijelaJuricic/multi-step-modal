@@ -2,7 +2,7 @@ import { Fragment, useRef, useState } from "react";
 import Services from "./Services";
 import "./Modal.css";
 
-const Korak2 = (props) => {
+const Step2 = (props) => {
   const [openCoupon, setOpenCoupon] = useState(false);
   const [couponSuccessMessage, setCouponSuccessMessage] = useState();
   const [couponErrorMessage, setCouponErrorMessage] = useState();
@@ -121,4 +121,4 @@ const Korak2 = (props) => {
   );
 };
 
-export default Korak2;
+export default Step2;
