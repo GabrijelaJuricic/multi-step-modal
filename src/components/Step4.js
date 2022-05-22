@@ -40,7 +40,7 @@ const Step4 = (props) => {
               Uredi
             </button>
           </div>
-          <p>{"car"}</p>
+          <p>{props.step1Value}</p>
         </div>
         <div className="step2">
           <div className="right_box">
@@ -49,7 +49,13 @@ const Step4 = (props) => {
               Uredi
             </button>
           </div>
-          <p>{"service"}</p>
+          <ul>
+            {/* {props.step2Value.map((row) => {
+              <li>
+                {row.service}, {row.price}
+              </li>;
+            })} */}
+          </ul>
         </div>
       </div>
       <div className="overview_row_2">

@@ -22,9 +22,11 @@ const ModalOverlay = (props) => {
 const Modal = (props) => {
   const [page, setPage] = useState(0);
   const [formIsValid, setFormIsValid] = useState(false);
+  const [step1Value, setStep1Value] = useState();
+  const [step2Value, setStep2Value] = useState([]);
+  const [step3Value, setStep3Value] = useState();
 
   // === Dummy data ===
-
   const stepInstructions = [
     "Korak 1. Odaberite proizvođača vašeg vozila",
     "Korak 2. Odaberite jednu ili više usluga",
@@ -33,16 +35,33 @@ const Modal = (props) => {
     "",
   ];
 
-  // === Pages ===
+  // === Helper functions ===
+  const selectedServicesChangesHandler = (service, price, subtract) => {
+    // if (!subtract) {
+    //   setStep2Value(step2Value.push({ service: service, price: price }));
+    // } else {
+    //   setStep2Value(step2Value.filter((e) => e !== { service, price }));
+    // }
+  };
 
+  // === Pages ===
   const pageDisplay = () => {
     switch (page) {
       case 0:
-        return <Step1 radioActive={formValidity} />;
+        return (
+          <Step1 radioActive={formValidity} returnSelected={setStep1Value} />
+        );
       case 1:
-        return <Step2 checkActive={formValidity} />;
+        return (
+          <Step2
+            checkActive={formValidity}
+            returnSelected={selectedServicesChangesHandler}
+          />
+        );
       case 2:
-        return <Step3 inputActive={step3Validity} />;
+        return (
+          <Step3 inputActive={step3Validity} returnSelected={setStep3Value} />
+        );
       case 3:
         return (
           <Step4
@@ -50,6 +69,7 @@ const Modal = (props) => {
             switchToModel={switchModelFunc}
             switchToService={switchServiceFunc}
             switchToContact={switchContactFunc}
+            step1Value={step1Value}
           />
         );
       case 4:
@@ -58,7 +78,6 @@ const Modal = (props) => {
   };
 
   //  === Validity check ===
-
   const formValidity = () => {
     setFormIsValid(true);
   };
@@ -72,7 +91,6 @@ const Modal = (props) => {
   };
 
   // === Step 4: Switch functions ===
-
   const switchModelFunc = () => {
     setPage((currPage) => {
       return currPage - 3;
@@ -90,7 +108,6 @@ const Modal = (props) => {
   };
 
   // === Previous & Next button ===
-
   const prevHandler = () => {
     setFormIsValid("");
     setPage((currPage) => currPage - 1);

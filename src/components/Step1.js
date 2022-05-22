@@ -1,10 +1,9 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import BrandItem from "./BrandItem";
 import "./Step1.css";
 
 const Step1 = (props) => {
   // === Dummy data ===
-
   var cars = [
     { name: "Peugeot", id: 1, value: "peugeot" },
     { name: "Volkswagen", id: 2, value: "volkswagen" },
@@ -35,6 +34,7 @@ const Step1 = (props) => {
                   onRadio={triggerRadio}
                   key={brand.id}
                   value={brand.value}
+                  updateSelectedValue={props.returnSelected}
                 />
               );
             })}

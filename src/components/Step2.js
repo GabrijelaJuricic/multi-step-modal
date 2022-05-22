@@ -68,6 +68,7 @@ const Step2 = (props) => {
                   price={option.value}
                   key={option.id}
                   onValue={addTotalAmount}
+                  onServiceChange={props.returnSelected}
                 />
               );
             })}

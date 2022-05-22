@@ -4,8 +4,8 @@ const BrandItem = (props) => {
   const [isChecked, setIsChecked] = useState(false);
 
   // === Event Handlers ===
-
   const radioHandler = (e) => {
+    props.updateSelectedValue(props.name);
     setIsChecked(e.target.checked);
     props.onRadio();
   };
