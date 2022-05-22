@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import BrandItem from "./BrandItem";
 import "./Step1.css";
 

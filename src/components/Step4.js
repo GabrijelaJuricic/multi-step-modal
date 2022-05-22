@@ -17,7 +17,6 @@ const Step4 = (props) => {
   props.summaryActive();
 
   // === Event Handlers ===
-
   const switchToModelHandler = () => {
     props.switchToModel();
   };
@@ -66,10 +65,12 @@ const Step4 = (props) => {
               Uredi
             </button>
           </div>
-          <p>{"contact info"}</p>
+          <p>{`Ime i prezime: ${props.step3Value.name}`}</p>
+          <p>{`Broj mobitela: ${props.step3Value.number}`}</p>
         </div>
         <div className="step3_right">
-          <p>{"contact info"}</p>
+          <p>{`Email adresa: ${props.step3Value.email}`}</p>
+          <p>{`Napomena: ${props.step3Value.text}`}</p>
         </div>
       </div>
     </Fragment>

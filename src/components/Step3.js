@@ -7,13 +7,12 @@ const Step3 = (props) => {
   const [emailError, setEmailError] = useState();
 
   // === Refs ===
-
   const inputNameRef = useRef();
   const inputNumberRef = useRef();
   const inputEmailRef = useRef();
+  const inputTextRef = useRef();
 
   // === Event Handlers ===
-
   const nameBlurHandler = () => {
     const nameValue = inputNameRef.current.value.trim();
     if (nameValue === "") {
@@ -40,11 +39,19 @@ const Step3 = (props) => {
   };
 
   const formSubmissionHandler = () => {
-    props.inputActive(
+    if (
       inputNameRef.current.value &&
-        inputNumberRef.current.value &&
-        inputEmailRef.current.value
-    );
+      inputNumberRef.current.value &&
+      inputEmailRef.current.value
+    ) {
+      props.inputActive(true);
+      props.returnSelected({
+        name: inputNameRef.current.value,
+        number: inputNumberRef.current.value,
+        email: inputEmailRef.current.value,
+        text: inputTextRef.current.value,
+      });
+    }
   };
 
   return (
@@ -76,6 +83,7 @@ const Step3 = (props) => {
           />
           {emailError && <p className="error_message">{emailError}</p>}
           <textarea
+            ref={inputTextRef}
             type="text"
             id="formText"
             placeholder="Napomena (opcionalno)"

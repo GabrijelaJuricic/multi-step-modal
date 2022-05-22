@@ -23,7 +23,7 @@ const Modal = (props) => {
   const [page, setPage] = useState(0);
   const [formIsValid, setFormIsValid] = useState(false);
   const [step1Value, setStep1Value] = useState();
-  const [step2Value, setStep2Value] = useState([]);
+  // const [step2Value, setStep2Value] = useState([]);
   const [step3Value, setStep3Value] = useState();
 
   // === Dummy data ===
@@ -70,6 +70,7 @@ const Modal = (props) => {
             switchToService={switchServiceFunc}
             switchToContact={switchContactFunc}
             step1Value={step1Value}
+            step3Value={step3Value}
           />
         );
       case 4:
