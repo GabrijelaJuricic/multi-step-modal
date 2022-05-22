@@ -14,29 +14,37 @@ const Step3 = (props) => {
 
   // === Event Handlers ===
 
-  const formSubmissionHandler = () => {
-    const enteredName = inputNameRef.current.value;
-    const enteredNumber = inputNumberRef.current.value;
-    const enteredEmail = inputEmailRef.current.value;
-
-    if (
-      enteredName.trim().length === 0 &&
-      enteredNumber.trim().length === 0 &&
-      enteredEmail.trim().length === 0
-    ) {
-      setNameError() || setEmailError() || setNumberError();
-    }
-    props.inputActive(enteredName && enteredNumber && enteredEmail);
-  };
-
   const nameBlurHandler = () => {
-    setNameError("Ime i prezime su obavezni.");
+    const nameValue = inputNameRef.current.value.trim();
+    if (nameValue === "") {
+      setNameError("Ime i prezime su obavezni.");
+    } else {
+      setNameError("");
+    }
   };
   const numberBlurHandler = () => {
-    setNumberError("Broj je obavezan.");
+    const numberValue = inputNumberRef.current.value.trim();
+    if (numberValue === "") {
+      setNumberError("Broj je obavezan.");
+    } else {
+      setNumberError("");
+    }
   };
   const emailBlurHandler = () => {
-    setEmailError("E-mail je obavezan.");
+    const emailValue = inputEmailRef.current.value.trim();
+    if (emailValue === "") {
+      setEmailError("E-mail je obavezan.");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const formSubmissionHandler = () => {
+    props.inputActive(
+      inputNameRef.current.value &&
+        inputNumberRef.current.value &&
+        inputEmailRef.current.value
+    );
   };
 
   return (
@@ -47,29 +55,29 @@ const Step3 = (props) => {
             ref={inputNameRef}
             onBlur={nameBlurHandler}
             type="text"
-            id="name"
+            id="formName"
             placeholder="Ime i prezime*"
           />
-          {nameError}
+          {nameError && <p className="error_message">{nameError}</p>}
           <input
             ref={inputNumberRef}
             onBlur={numberBlurHandler}
             type="number"
-            id="name"
+            id="formNumber"
             placeholder="Broj mobitela*"
           />
-          {numberError}
+          {numberError && <p className="error_message">{numberError}</p>}
           <input
             ref={inputEmailRef}
             onBlur={emailBlurHandler}
             type="email"
-            id="name"
+            id="formEmail"
             placeholder="Email*"
           />
-          {emailError}
+          {emailError && <p className="error_message">{emailError}</p>}
           <textarea
             type="text"
-            id="name"
+            id="formText"
             placeholder="Napomena (opcionalno)"
           ></textarea>
         </div>
