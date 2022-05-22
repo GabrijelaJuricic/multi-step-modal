@@ -1,4 +1,5 @@
 import { Fragment, useRef, useState } from "react";
+import "./Step3.css";
 
 const Step3 = (props) => {
   const [nameError, setNameError] = useState();
@@ -41,32 +42,23 @@ const Step3 = (props) => {
   return (
     <Fragment>
       <form onChange={formSubmissionHandler}>
-        <div>
-          <div className="form-control">
-            <input
-              ref={inputNameRef}
-              onBlur={nameBlurHandler}
-              type="text"
-              id="name"
-              placeholder="Ime i prezime*"
-            />
-          </div>
+        <div className="form">
+          <input
+            ref={inputNameRef}
+            onBlur={nameBlurHandler}
+            type="text"
+            id="name"
+            placeholder="Ime i prezime*"
+          />
           {nameError}
-        </div>
-        <div>
-          <div className="form-control">
-            <input
-              ref={inputNumberRef}
-              onBlur={numberBlurHandler}
-              type="number"
-              id="name"
-              placeholder="Broj mobitela*"
-            />
-          </div>
+          <input
+            ref={inputNumberRef}
+            onBlur={numberBlurHandler}
+            type="number"
+            id="name"
+            placeholder="Broj mobitela*"
+          />
           {numberError}
-        </div>
-
-        <div>
           <input
             ref={inputEmailRef}
             onBlur={emailBlurHandler}
@@ -74,16 +66,12 @@ const Step3 = (props) => {
             id="name"
             placeholder="Email*"
           />
-        </div>
-        {emailError}
-        <div>
-          <div className="form-control">
-            <textarea
-              type="text"
-              id="name"
-              placeholder="Napomena (opcionalno)"
-            ></textarea>
-          </div>
+          {emailError}
+          <textarea
+            type="text"
+            id="name"
+            placeholder="Napomena (opcionalno)"
+          ></textarea>
         </div>
       </form>
     </Fragment>

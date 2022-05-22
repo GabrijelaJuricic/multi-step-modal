@@ -1,0 +1,56 @@
+.overview_row_1 {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.overview_row_2 {
+  border-top: 0.5px solid black;
+  display: flex;
+  flex-flow: wrap;
+}
+
+.step1 {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+.step2 {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+}
+.step3_left {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+.step3_right {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+}
+
+.left_box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.right_box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.step p {
+  text-align: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 32px;
+}

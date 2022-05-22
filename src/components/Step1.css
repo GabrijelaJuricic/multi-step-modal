@@ -1,0 +1,27 @@
+.radio {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  padding-bottom: 70px;
+}
+
+.radio ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-left: 0;
+}
+
+.radio ul li {
+  padding: 5px;
+  padding-left: 0;
+  min-width: 115px;
+  justify-content: left;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.radio input {
+  margin-left: 0px;
+}

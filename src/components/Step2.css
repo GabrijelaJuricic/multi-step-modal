@@ -1,0 +1,64 @@
+.checkbox {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+.checkbox ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-left: 0;
+}
+
+.checkbox ul li {
+  padding: 5px;
+  padding-left: 0;
+  min-width: 240px;
+  justify-content: left;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.coupon {
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.coupon div {
+  margin-top: 15px;
+}
+
+.coupon input {
+  height: 40px;
+  margin-right: 15px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.coupon_success_message {
+  font-size: small;
+  color: green;
+}
+
+.coupon_error_message {
+  font-size: small;
+  color: red;
+}
+
+.coupon_calculation_message {
+  margin-bottom: 0;
+}
+
+.total_amount {
+  font-size: larger;
+}

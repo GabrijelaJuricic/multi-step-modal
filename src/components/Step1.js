@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import BrandItem from "./BrandItem";
+import "./Step1.css";
 
 const Step1 = (props) => {
   // === Dummy data ===
@@ -25,7 +26,7 @@ const Step1 = (props) => {
   return (
     <Fragment>
       <form>
-        <div>
+        <div className="radio">
           <ul>
             {cars.map((brand) => {
               return (

@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState } from "react";
 import Services from "./Services";
-import "./Modal.css";
+import "./Step2.css";
 
 const Step2 = (props) => {
   const [openCoupon, setOpenCoupon] = useState(false);
@@ -58,7 +58,7 @@ const Step2 = (props) => {
   return (
     <Fragment>
       <form>
-        <div>
+        <div className="checkbox">
           <ul>
             {serviceItems.map((option) => {
               return (
@@ -74,48 +74,62 @@ const Step2 = (props) => {
           </ul>
         </div>
       </form>
-      <form onSubmit={submitHandler}>
-        {!openCoupon && (
-          <a href="#coupon" onClick={couponHandler}>
-            Imam kupon
-          </a>
-        )}
+      <div className="coupon">
+        <form onSubmit={submitHandler}>
+          {!openCoupon && (
+            <a href="#coupon" onClick={couponHandler}>
+              Imam kupon
+            </a>
+          )}
 
-        {openCoupon && (
-          <div id="coupon">
-            <input
-              ref={couponInputRef}
-              type="text"
-              name="coupon"
-              placeholder="Unesite kod"
-            />
-            <button type="submit" value="Submit" onClick={messageHandler}>
-              Primijeni
-            </button>
-            {couponErrorMessage && (
-              <div>
-                <p>{couponErrorMessage}</p>
+          {openCoupon && (
+            <div id="coupon">
+              <div className="coupon_input">
+                <input
+                  ref={couponInputRef}
+                  type="text"
+                  name="coupon"
+                  placeholder="Unesite kod"
+                />
+                <button type="submit" value="Submit" onClick={messageHandler}>
+                  Primijeni
+                </button>
               </div>
-            )}
-            {couponSuccessMessage && (
-              <div>
-                <p>{couponSuccessMessage}</p>
-                <p>OSNOVICA: {`${totalAmount} kn`}</p>
-                <p>Popust (30%): {`${totalAmount * -0.3} kn`}</p>
-              </div>
-            )}
-          </div>
-        )}
-      </form>
-      <div>
-        <span>
-          <strong>Ukupno: </strong>
-        </span>
-        {couponSuccessMessage ? (
-          <span>{`${totalAmount * 0.7} kn`}</span>
-        ) : (
-          <span>{`${totalAmount} kn`}</span>
-        )}
+              {couponErrorMessage && (
+                <div className="message">
+                  <p className="coupon_error_message">{couponErrorMessage}</p>
+                </div>
+              )}
+              {couponSuccessMessage && (
+                <div className="message">
+                  <p className="coupon_success_message">
+                    {couponSuccessMessage}
+                  </p>
+                  <p className="coupon_calculation_message">
+                    OSNOVICA: <strong>{`${totalAmount} kn`}</strong>
+                  </p>
+                  <p className="coupon_calculation_message">
+                    Popust (30%): <strong>{`${totalAmount * -0.3} kn`}</strong>
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+        </form>
+        <div className="total_amount">
+          <span>
+            <strong>UKUPNO: </strong>
+          </span>
+          {couponSuccessMessage ? (
+            <span>
+              <strong>{`${totalAmount * 0.7} kn`}</strong>
+            </span>
+          ) : (
+            <span>
+              <strong>{`${totalAmount} kn`}</strong>
+            </span>
+          )}
+        </div>
       </div>
     </Fragment>
   );

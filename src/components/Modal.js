@@ -30,7 +30,7 @@ const Modal = (props) => {
     "Korak 2. Odaberite jednu ili više usluga",
     "Korak 3. Vaši kontakt podaci",
     "Korak 4. Pregled i potvrda vašeg odabira",
-    "Korak 5. Vaša prijava je uspješno poslana",
+    "",
   ];
 
   // === Pages ===
@@ -107,9 +107,9 @@ const Modal = (props) => {
       {ReactDOM.createPortal(<Backdrop />, document.getElementById("overlays"))}
       {ReactDOM.createPortal(
         <ModalOverlay>
-          <div>
-            <h1 className="title">Konfigurator servisa</h1>
-            <h3>{stepInstructions[page]}</h3>
+          <div className="title">
+            <h1>Konfigurator servisa</h1>
+            <h3 className="subtitle">{stepInstructions[page]}</h3>
           </div>
           <div className="body">{pageDisplay()}</div>
           <div className="footer">

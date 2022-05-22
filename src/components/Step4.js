@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import "./Step4.css";
 
 const Step4 = (props) => {
   // === Dummy data ===
@@ -31,20 +32,39 @@ const Step4 = (props) => {
   return (
     <Fragment>
       {message}
-      <div>
-        <h3>MODEL VOZILA</h3>
-        <button onClick={switchToModelHandler}>Uredi</button>
-        <p>{"car"}</p>
+      <div className="overview_row_1">
+        <div className="step1">
+          <div className="left_box">
+            <h3>MODEL VOZILA</h3>
+            <button className="btn" onClick={switchToModelHandler}>
+              Uredi
+            </button>
+          </div>
+          <p>{"car"}</p>
+        </div>
+        <div className="step2">
+          <div className="right_box">
+            <h3>ODABRANE USLUGE</h3>
+            <button className="btn" onClick={switchToServiceHandler}>
+              Uredi
+            </button>
+          </div>
+          <p>{"service"}</p>
+        </div>
       </div>
-      <div>
-        <h3>ODABRANE USLUGE</h3>
-        <button onClick={switchToServiceHandler}>Uredi</button>
-        <p>{"service"}</p>
-      </div>
-      <div>
-        <h3>KONTAKT PODACI</h3>
-        <button onClick={switchToContactHandler}>Uredi</button>
-        <p>{"contact info"}</p>
+      <div className="overview_row_2">
+        <div className="step3_left">
+          <div className="left_box">
+            <h3>KONTAKT PODACI</h3>
+            <button className="btn" onClick={switchToContactHandler}>
+              Uredi
+            </button>
+          </div>
+          <p>{"contact info"}</p>
+        </div>
+        <div className="step3_right">
+          <p>{"contact info"}</p>
+        </div>
       </div>
     </Fragment>
   );
