@@ -12,15 +12,17 @@ const BrandItem = (props) => {
 
   return (
     <li key={props.id} style={{ listStyleType: "none" }}>
-      <input
-        defaultChecked={isChecked}
-        onChange={radioHandler}
-        type="radio"
-        id={props.id}
-        name="cars"
-        value={props.value}
-      />
-      <label htmlFor={props.name}>{props.name}</label>
+      <label htmlFor={props.key}>
+        <input
+          defaultChecked={isChecked}
+          onChange={radioHandler}
+          type="radio"
+          id={props.key}
+          name="cars"
+          value={props.value}
+        />
+        {props.name}
+      </label>
     </li>
   );
 };

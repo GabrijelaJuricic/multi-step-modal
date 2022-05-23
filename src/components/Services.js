@@ -16,15 +16,16 @@ const Services = (props) => {
   return (
     <div>
       <li key={props.id} style={{ listStyleType: "none" }}>
-        <input
-          defaultChecked={isChecked}
-          onChange={() => checkboxHandler()}
-          type="checkbox"
-          service={props.service}
-          price={props.price}
-        />
-        <label htmlFor={props.service}>
-          {props.service} {`(${props.price} kn)`}
+        <label htmlFor={props.key}>
+          <input
+            defaultChecked={isChecked}
+            onChange={() => checkboxHandler()}
+            type="checkbox"
+            service={props.service}
+            price={props.price}
+            id={props.key}
+          />
+          {props.service} {`(${props.price.toFixed(2)} kn)`}
         </label>
       </li>
     </div>

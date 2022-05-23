@@ -78,7 +78,7 @@ const Step2 = (props) => {
       <div className="coupon">
         <form onSubmit={submitHandler}>
           {!openCoupon && (
-            <a href="#coupon" onClick={couponHandler}>
+            <a href="#" onClick={couponHandler}>
               Imam kupon
             </a>
           )}
@@ -107,10 +107,13 @@ const Step2 = (props) => {
                     {couponSuccessMessage}
                   </p>
                   <p className="coupon_calculation_message">
-                    OSNOVICA: <strong>{`${totalAmount} kn`}</strong>
+                    OSNOVICA: <strong>{`${totalAmount.toFixed(2)} kn`}</strong>
                   </p>
                   <p className="coupon_calculation_message">
-                    Popust (30%): <strong>{`${totalAmount * -0.3} kn`}</strong>
+                    Popust (30%):{" "}
+                    <strong>{`${(totalAmount.toFixed(2) * -0.3).toFixed(
+                      2
+                    )} kn`}</strong>
                   </p>
                 </div>
               )}
@@ -123,11 +126,11 @@ const Step2 = (props) => {
           </span>
           {couponSuccessMessage ? (
             <span>
-              <strong>{`${totalAmount * 0.7} kn`}</strong>
+              <strong>{`${(totalAmount * 0.7).toFixed(2)} kn`}</strong>
             </span>
           ) : (
             <span>
-              <strong>{`${totalAmount} kn`}</strong>
+              <strong>{`${totalAmount.toFixed(2)} kn`}</strong>
             </span>
           )}
         </div>
