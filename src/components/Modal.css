@@ -7,7 +7,6 @@
   z-index: 20;
   background-color: rgba(0, 0, 0, 0.25);
 }
-
 .modal {
   position: fixed;
   top: 15vh;
@@ -18,16 +17,15 @@
   box-shadow: 0 2px 8px rgba(8, 19, 46, 0.2);
   z-index: 30;
 }
-
 .title {
   text-align: center;
   margin-top: 0px;
 }
-
 .subtitle {
   text-align: left;
 }
 
+/* --- Footer --- */
 .footer {
   display: flex;
   justify-content: flex-end;
@@ -37,6 +35,7 @@
   padding-top: 30px;
 }
 
+/* --- Next/Prev Button --- */
 button {
   min-width: 75px;
   height: auto;

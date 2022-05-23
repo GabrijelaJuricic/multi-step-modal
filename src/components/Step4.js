@@ -33,7 +33,7 @@ const Step4 = (props) => {
       {message}
       <div className="overview_row_1">
         <div className="step1">
-          <div className="left_box">
+          <div className="title_button_box">
             <h3>MODEL VOZILA</h3>
             <button className="btn" onClick={switchToModelHandler}>
               Uredi
@@ -42,35 +42,54 @@ const Step4 = (props) => {
           <p>{props.step1Value}</p>
         </div>
         <div className="step2">
-          <div className="right_box">
+          <div className="title_button_box">
             <h3>ODABRANE USLUGE</h3>
             <button className="btn" onClick={switchToServiceHandler}>
               Uredi
             </button>
           </div>
-          <ul>
-            {/* {props.step2Value.map((row) => {
-              <li>
-                {row.service}, {row.price}
-              </li>;
-            })} */}
-          </ul>
+          <div className="row">
+            <p>Zamjena ulja i filtera</p>
+            <p>{"500,00 kn"}</p>
+          </div>
+          <div className="row">
+            <p>{"Promjena pakni"}</p>
+            <p>{"450,00 kn"}</p>
+          </div>
+          <div className="row" id="discount">
+            Popust (30%): {"-285,00 kn"}
+          </div>
+          <div className="row" id="total">
+            UKUPNO: {"665,00 kn"}
+          </div>
         </div>
       </div>
       <div className="overview_row_2">
         <div className="step3_left">
-          <div className="left_box">
+          <div className="title_button_box">
             <h3>KONTAKT PODACI</h3>
             <button className="btn" onClick={switchToContactHandler}>
               Uredi
             </button>
           </div>
-          <p>{`Ime i prezime: ${props.step3Value.name}`}</p>
-          <p>{`Broj mobitela: ${props.step3Value.number}`}</p>
+          <div className="row">
+            <p>Ime i prezime:</p>
+            {props.step3Value.name}
+          </div>
+          <div className="row">
+            <p>Broj mobitela:</p>
+            {props.step3Value.number}
+          </div>
         </div>
         <div className="step3_right">
-          <p>{`Email adresa: ${props.step3Value.email}`}</p>
-          <p>{`Napomena: ${props.step3Value.text}`}</p>
+          <div className="row">
+            <p>Email adresa:</p>
+            {props.step3Value.email}
+          </div>
+          <div className="row">
+            <p>Napomena:</p>
+            {props.step3Value.text}
+          </div>
         </div>
       </div>
     </Fragment>
