@@ -4,6 +4,7 @@ import "./Step2.css";
 
 const Step2 = (props) => {
   const [openCoupon, setOpenCoupon] = useState(false);
+  const [showLink, setShowLink] = useState(true);
   const [couponSuccessMessage, setCouponSuccessMessage] = useState();
   const [couponErrorMessage, setCouponErrorMessage] = useState();
   const [totalAmount, setTotalAmount] = useState(0);
@@ -49,9 +50,11 @@ const Step2 = (props) => {
     if (enteredCoupon.trim().toString() === "Tokić123") {
       setCouponSuccessMessage("Hvala vam, unijeli ste ispravan kod kupona!");
       setCouponErrorMessage("");
+      setShowLink(false);
     } else {
       setCouponErrorMessage("Neispravan kod, molimo vas pokušajte ponovno.");
       setCouponSuccessMessage("");
+      setShowLink(true);
     }
   };
 
@@ -85,17 +88,19 @@ const Step2 = (props) => {
 
           {openCoupon && (
             <div id="coupon">
-              <div className="coupon_input">
-                <input
-                  ref={couponInputRef}
-                  type="text"
-                  name="coupon"
-                  placeholder="Unesite kod"
-                />
-                <button type="submit" value="Submit" onClick={messageHandler}>
-                  Primijeni
-                </button>
-              </div>
+              {showLink ? (
+                <div className="coupon_input">
+                  <input
+                    ref={couponInputRef}
+                    type="text"
+                    name="coupon"
+                    placeholder="Unesite kod"
+                  />
+                  <button type="submit" value="Submit" onClick={messageHandler}>
+                    Primijeni
+                  </button>
+                </div>
+              ) : null}
               {couponErrorMessage && (
                 <div className="message">
                   <p className="coupon_error_message">{couponErrorMessage}</p>
