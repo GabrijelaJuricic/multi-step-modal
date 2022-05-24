@@ -4,13 +4,10 @@ const Services = (props) => {
   const [isChecked, setIsChecked] = useState(false);
 
   // === Event Handlers ===
-
   const checkboxHandler = () => {
     props.onServiceChange(props.service, props.price, isChecked);
     isChecked ? props.onValue(props.price * -1.0) : props.onValue(props.price);
     setIsChecked(!isChecked);
-
-    props.onCheckbox();
   };
 
   return (

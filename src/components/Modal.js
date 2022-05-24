@@ -11,6 +11,7 @@ import Step5 from "./Step5";
 const Backdrop = () => {
   return <div className="backdrop"></div>;
 };
+
 const ModalOverlay = (props) => {
   return (
     <div className="modal">
@@ -37,15 +38,22 @@ const Modal = (props) => {
 
   // === Helper functions ===
   const selectedServicesChangesHandler = (service, price, subtract) => {
-    if (!subtract) {
+    if (
+      !subtract &&
+      step2Value.filter((e) => e.service == service).length == 0
+    ) {
       setStep2Value((step2Value) => [
         ...step2Value,
         { service: service, price: price },
       ]);
-    } else {
+      setFormIsValid(true);
+    } else if (subtract) {
       setStep2Value((step2Value) =>
         step2Value.filter((e) => e.service !== service)
       );
+      if (step2Value.length == 1) {
+        setFormIsValid(false);
+      }
     }
   };
 
@@ -57,12 +65,7 @@ const Modal = (props) => {
           <Step1 radioActive={formValidity} returnSelected={setStep1Value} />
         );
       case 1:
-        return (
-          <Step2
-            checkActive={formValidity}
-            returnSelected={selectedServicesChangesHandler}
-          />
-        );
+        return <Step2 returnSelected={selectedServicesChangesHandler} />;
       case 2:
         return (
           <Step3 inputActive={step3Validity} returnSelected={setStep3Value} />
@@ -103,11 +106,13 @@ const Modal = (props) => {
       return currPage - 3;
     });
   };
+
   const switchServiceFunc = () => {
     setPage((currPage) => {
       return currPage - 2;
     });
   };
+
   const switchContactFunc = () => {
     setPage((currPage) => {
       return currPage - 1;
@@ -116,9 +121,10 @@ const Modal = (props) => {
 
   // === Previous & Next button ===
   const prevHandler = () => {
-    setFormIsValid("");
     setPage((currPage) => currPage - 1);
+    setFormIsValid("");
   };
+
   const onClickHandler = () => {
     if (formIsValid) {
       setPage((currPage) => currPage + 1);

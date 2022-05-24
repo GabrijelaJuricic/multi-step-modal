@@ -12,7 +12,6 @@ const Step2 = (props) => {
   const couponInputRef = useRef();
 
   // === Dummy data ===
-
   var serviceItems = [
     { serviceItem: "Zamjena ulja i filtera", value: 500, id: 66 },
     { serviceItem: "Promjena pakni", value: 450, id: 87 },
@@ -23,7 +22,6 @@ const Step2 = (props) => {
   ];
 
   // === Event Handlers ===
-
   const couponHandler = () => {
     setOpenCoupon(true);
   };
@@ -33,17 +31,11 @@ const Step2 = (props) => {
   };
 
   // === ===
-
-  const triggerCheckbox = () => {
-    props.checkActive();
-  };
-
   const addTotalAmount = (amount) => {
     setTotalAmount(totalAmount + amount);
   };
 
   //  === Coupon section ===
-
   const messageHandler = () => {
     const enteredCoupon = couponInputRef.current.value;
 
@@ -66,7 +58,6 @@ const Step2 = (props) => {
             {serviceItems.map((option) => {
               return (
                 <Services
-                  onCheckbox={triggerCheckbox}
                   service={option.serviceItem}
                   price={option.value}
                   key={option.id}

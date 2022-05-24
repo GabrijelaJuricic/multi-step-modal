@@ -3,7 +3,6 @@ import "./Step4.css";
 
 const Step4 = (props) => {
   // === Dummy data ===
-
   var message = (
     <p>
       Molimo vas da još jednom pregledate i potvrdite unesene podatke. Ukoliko
@@ -24,6 +23,7 @@ const Step4 = (props) => {
   const switchToServiceHandler = () => {
     props.switchToService();
   };
+
   const switchToContactHandler = () => {
     props.switchToContact();
   };
@@ -53,7 +53,7 @@ const Step4 = (props) => {
               return (
                 <li className="row" key={props.id}>
                   <p>{services.service}</p>
-                  {`${services.price} kn`}
+                  {`${services.price.toFixed(2)} kn`}
                 </li>
               );
             })}
