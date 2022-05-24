@@ -26,6 +26,13 @@
   align-items: baseline;
   padding-right: 30px;
 }
+.step2 ul {
+  padding: 0;
+  margin: 0;
+}
+.step2 li {
+  list-style: "none";
+}
 #discount {
   justify-content: flex-end;
   padding-right: 33px;

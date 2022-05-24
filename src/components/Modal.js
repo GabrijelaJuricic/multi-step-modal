@@ -23,7 +23,7 @@ const Modal = (props) => {
   const [page, setPage] = useState(0);
   const [formIsValid, setFormIsValid] = useState(false);
   const [step1Value, setStep1Value] = useState();
-  // const [step2Value, setStep2Value] = useState([]);
+  const [step2Value, setStep2Value] = useState([]);
   const [step3Value, setStep3Value] = useState();
 
   // === Dummy data ===
@@ -37,11 +37,16 @@ const Modal = (props) => {
 
   // === Helper functions ===
   const selectedServicesChangesHandler = (service, price, subtract) => {
-    // if (!subtract) {
-    //   setStep2Value(step2Value.push({ service: service, price: price }));
-    // } else {
-    //   setStep2Value(step2Value.filter((e) => e !== { service, price }));
-    // }
+    if (!subtract) {
+      setStep2Value((step2Value) => [
+        ...step2Value,
+        { service: service, price: price },
+      ]);
+    } else {
+      setStep2Value((step2Value) =>
+        step2Value.filter((e) => e.service !== service)
+      );
+    }
   };
 
   // === Pages ===
@@ -70,6 +75,7 @@ const Modal = (props) => {
             switchToService={switchServiceFunc}
             switchToContact={switchContactFunc}
             step1Value={step1Value}
+            step2Value={step2Value}
             step3Value={step3Value}
           />
         );

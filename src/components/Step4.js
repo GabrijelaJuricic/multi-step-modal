@@ -48,14 +48,17 @@ const Step4 = (props) => {
               Uredi
             </button>
           </div>
-          <div className="row">
-            <p>Zamjena ulja i filtera</p>
-            <p>{"500,00 kn"}</p>
-          </div>
-          <div className="row">
-            <p>{"Promjena pakni"}</p>
-            <p>{"450,00 kn"}</p>
-          </div>
+          <ul>
+            {props.step2Value.map((services) => {
+              return (
+                <li className="row" key={props.id}>
+                  <p>{services.service}</p>
+                  {`${services.price} kn`}
+                </li>
+              );
+            })}
+          </ul>
+
           <div className="row" id="discount">
             Popust (30%): {"-285,00 kn"}
           </div>
